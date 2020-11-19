@@ -6,25 +6,40 @@
 
 void main(void){
 
-	FILE *fp = NULL;
-	// char c;
+	FILE *fp;
 	char str[100];
+	char path[100];
+	char lookup[100];
 	
-	fp = fopen("sample.txt", "r");
+	// 파일 경로 입력 받기 
+	printf("input file path:");
+	scanf("%s", path);
+	
+	
+	// 찾는 단어 입력 받기 
+	printf("input search word:");
+	scanf("%s", lookup);
+	
+	fp = fopen(path, "r");
 
 	if (fp == NULL)
 	{
+		printf("invalid path! (%s)\n", path);
 		return -1;
 	}
 	
 	
-	//while ( (c=fgetc(fp)) != EOF ){
 	while( fgets(str, 100, fp) != NULL){
-	
-		// printf("%c", c);
-		printf("%s", str);
+		// strncmp
+		if(strncmp(str, lookup, strlen(lookup)) == 0)
+		{
+			printf("Search succed!\n");
+			fclose(fp);
+			return 0;
+		}	
 	}
 	
+	printf("Search failed!\n");
 	fclose(fp);
 	
 	return 0;
