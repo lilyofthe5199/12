@@ -3,25 +3,30 @@
 #include <string.h>
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-
-// 실습 3, 실습 4 
-
 void main(void) {
 	
-	char src[] = "The worst things to eat before you sleep";
-	char dst[100];
+	FILE *fp;
+	char str[100];
+	int i;
 	
-	char str[30] = "happy C programming";
+	// "w" 쓰기 모드로 열기 
+	fp = fopen("C:\sample.txt", "w");
+	if (fp == NULL)
+	{
+		return -1;
+	}
 	
-	// strcpy() 함수 사용 (문자열 포인터를 인수로 넣음)
-	// <복사 대상 문자열> = strcpy ( <대상>, <원본> );
-	strcpy(dst, src);
+	for(i=0; i<3; i++)
+	{
+		printf("input a word:");
+		
+		scanf("%s", str);
+		
+		fprintf(fp, "%s\n", str);
+	}
 	
-	printf("copied string : %s\n", dst);
+	// 닫기 
+	fclose(fp);
 	
-	// strlen() 함수 사용 (문자열 포인터를 인수로 넣음)
-	// <문자열 길이> = strlen ( <입력 문자열> );
-	printf("문자열 \"%s\"의 길이 : %i", str, strlen(str));
-	
-	
+	return 0;
 }
